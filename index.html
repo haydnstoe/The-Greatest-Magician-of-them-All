@@ -1,22 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Interactive Quiz</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>The Greatest Magician of them All</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+    select {
+      margin: 0 4px;
+    }
+    .incorrect {
+      color: red;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>HTML Basics Quiz</h1>
-  <form id="quiz-form">
-    <div>
-      <p>1. What does HTML stand for?</p>
-      <input type="radio" name="q1" value="a"> Home Tool Markup Language<br>
-      <input type="radio" name="q1" value="b"> HyperText Markup Language<br>
-      <input type="radio" name="q1" value="c"> Hyperlink Text Management Language<br>
-    </div>
-    <button type="button" onclick="submitQuiz()">Submit</button>
-  </form>
+  <h1>The Greatest Magician of them All</h1>
+  <p>
+    Oresto <select data-answer="the"></select> Magnificent invites <select data-answer="a"></select> member of <select data-answer="the"></select> audience up onto <select data-answer="the"></select> stage. 
+    He ask <select data-answer="the"></select> audience member their name. <select data-answer="The"></select> audience member says her name is Maryna. 
+    Oresto <select data-answer="the"></select> magician then takes <select data-answer="a"></select> deck of cards out from under his black cloak and splays out <select data-answer="the"></select> deck in front of Maryna. 
+    He says to Maryna “pick <select data-answer="a"></select> card, pick any card.” Maryna picks out <select data-answer="the"></select> Ten of Spades. 
+    Oresto then says, “please look at <select data-answer="the"></select> card, but don't show me <select data-answer="the"></select> card, memorise it, then place <select data-answer="the"></select> card back in <select data-answer="the"></select> deck.” 
+    <select data-answer="The"></select> great magician shuffles <select data-answer="the"></select> deck, then extracts <select data-answer="a"></select> single card. 
+    He shows <select data-answer="the"></select> card to Maryna and asks her “was this <select data-answer="the"></select> card you chose?” She replies that it was. 
+    <select data-answer="The"></select> audience goes wild. Maryna returns to her seat. 
+    Oresto <select data-answer="the"></select> Magnificent takes <select data-answer="a"></select> deep bow, but as he does, he accidentally knocks <select data-answer="the"></select> deck of cards against his knee, and <select data-answer="the"></select> cards fall to <select data-answer="the"></select> stage floor. 
+    <select data-answer="The"></select> audience members in <select data-answer="the"></select> front row can now see that <select data-answer="the"></select> entire deck is made up 52 cards, all of which are <select data-answer="the"></select> Ten of Spades.
+  </p>
+  <p>
+    <select data-answer="A"></select> huge white rabbit bounds onto <select data-answer="the"></select> stage after Oresto <select data-answer="the"></select> Magnificent has left. 
+    <select data-answer="The"></select> rabbit is wearing <select data-answer="a"></select> very tall, black, top hat. 
+    <select data-answer="The"></select> rabbit then announces to <select data-answer="the"></select> assembled audience “I will now perform <select data-answer="a"></select> feat of magic that will astound and confound you. 
+    I will extract <select data-answer="the"></select> great Oresto <select data-answer="the"></select> now-not-quite-so-Magnificent from my top hat!” and then proceeds to do exactly as predicted. 
+    <select data-answer="The"></select> audience is shocked and awe stuck. They have never before seen <select data-answer="a"></select> rabbit wearing <select data-answer="a"></select> hat!
+  </p>
+  <p>
+    Oresto <select data-answer="the"></select> now-not-quite-so-Magnificent now stands in front of <select data-answer="the"></select> audience knowing he has to regain their trust, so he calls on another member of <select data-answer="the"></select> audience to come up on <select data-answer="nothing"></select> stage. 
+    Oresto then takes what looks like <select data-answer="a"></select> drawing pad used by <select data-answer="nothing"></select> artists out of <select data-answer="a"></select> shiny paper covered box he had brought on <select data-answer="nothing"></select> stage with him. 
+    <select data-answer="The"></select> audience member is now on <select data-answer="the"></select> stage facing <select data-answer="the"></select> magician. 
+    Oresto asks <select data-answer="the"></select> gentleman “have we ever met before?” <select data-answer="The"></select> gentleman responds in <select data-answer="the"></select> negative. 
+    Oresto then asks <select data-answer="the"></select> gentleman “what is your name?” <select data-answer="The"></select> gentleman answers “Bohdan”, Oresto then asks <select data-answer="the"></select> gentleman “what is <select data-answer="the"></select> name your parents gave you?” 
+    <select data-answer="The"></select> gentleman, now slightly confused, answers “Bohdan.” 
+    Oresto then asks him how old he is, how old he was when he was born, how many years ago that was, where he works, what kind of work he does, and why does he do it. 
+    Bohdan answers all <select data-answer="the"></select> questions. 
+    Oresto <select data-answer="the"></select> Magnificent then shows <select data-answer="the"></select> artist’s drawing pad to Bohdan and asks in <select data-answer="a"></select> triumphant voice “is this <select data-answer="an"></select> accurate reproduction of your face?” 
+    Bohdan looks extremely surprised and replies, “My goodness! Yes, yes, it is <select data-answer="an"></select> extremely accurate reproduction of my face!!!” 
+    <select data-answer="The"></select> audience go wild again. 
+    As Oresto <select data-answer="the"></select> Magnificent takes <select data-answer="a"></select> well-deserved bow <select data-answer="the"></select> audience can see that <select data-answer="the"></select> other side of <select data-answer="the"></select> artist’s pad is actually <select data-answer="a"></select> mirror.
+  </p>
+
+  <button onclick="checkAnswers()">Submit Answers</button>
   <div id="result"></div>
 
-  <script src="script.js"></script>
+  <script>
+    const options = ["the", "a", "an", "nothing"];
+
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    // Populate all selects with randomized options
+    document.querySelectorAll("select").forEach(select => {
+      let shuffled = shuffle([...options]);
+      shuffled.forEach(opt => {
+        let option = document.createElement("option");
+        option.value = opt;
+        option.textContent = opt;
+        select.appendChild(option);
+      });
+    });
+
+    function checkAnswers() {
+      let selects = document.querySelectorAll("select");
+      let correct = 0;
+      let total = selects.length;
+
+      selects.forEach(select => {
+        let answer = select.dataset.answer.trim().toLowerCase();
+        let user = select.value.trim().toLowerCase();
+
+        if (user === answer) {
+          select.classList.remove("incorrect");
+          select.classList.add("correct");
+          correct++;
+        } else {
+          select.classList.remove("correct");
+          select.classList.add("incorrect");
+        }
+      });
+
+      document.getElementById("result").textContent = 
+        `You got ${correct} out of ${total} correct.`;
+    }
+  </script>
 </body>
 </html>
