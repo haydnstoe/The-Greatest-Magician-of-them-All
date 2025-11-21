@@ -6,11 +6,13 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      font-size: 19px; /* increased by 3 points */
       margin: 40px;
-      line-height: 1.6;
+      line-height: 2.0; /* more sentence spacing */
     }
     select {
       margin: 0 4px;
+      font-size: 19px;
     }
     .incorrect {
       color: red;
@@ -63,7 +65,6 @@
     As Oresto <select data-answer="the"></select> Magnificent takes <select data-answer="a"></select> well-deserved bow <select data-answer="the"></select> audience can see that <select data-answer="the"></select> other side of <select data-answer="the"></select> artist’s pad is actually <select data-answer="a"></select> mirror.
   </p>
 
-  <button onclick="checkAnswers()">Submit Answers</button>
   <div id="result"></div>
 
   <script>
@@ -80,8 +81,13 @@
       return array;
     }
 
-    // Populate all selects with randomized options
+    // Populate all selects with randomized options, empty default
     document.querySelectorAll("select").forEach(select => {
+      let emptyOption = document.createElement("option");
+      emptyOption.value = "";
+      emptyOption.textContent = "";
+      select.appendChild(emptyOption);
+
       let shuffled = shuffle([...options]);
       shuffled.forEach(opt => {
         let option = document.createElement("option");
@@ -89,30 +95,20 @@
         option.textContent = opt;
         select.appendChild(option);
       });
-    });
 
-    function checkAnswers() {
-      let selects = document.querySelectorAll("select");
-      let correct = 0;
-      let total = selects.length;
-
-      selects.forEach(select => {
+      // Immediate feedback on change
+      select.addEventListener("change", () => {
         let answer = select.dataset.answer.trim().toLowerCase();
         let user = select.value.trim().toLowerCase();
-
         if (user === answer) {
           select.classList.remove("incorrect");
           select.classList.add("correct");
-          correct++;
         } else {
           select.classList.remove("correct");
           select.classList.add("incorrect");
         }
       });
-
-      document.getElementById("result").textContent = 
-        `You got ${correct} out of ${total} correct.`;
-    }
+    });
   </script>
 </body>
 </html>
